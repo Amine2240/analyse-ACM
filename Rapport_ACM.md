@@ -83,26 +83,33 @@ Les contributions montrent que l'axe 1 est dominé par l'assurance et l'éducati
 
 ## 7. Analyse des résultats
 
+En ACM, nous ne considérons que les valeurs propres supérieures à la moyenne égale à $1/p = 1/9 \approx 0.11$. Les 5 premiers axes seront pris en compte pour l'interprétation. Le taux d'inertie cumulé des 2 premiers axes est de 16.49%.
+
 • **Qualité de représentation** :
-Les modalités `insurance`, `education` et `ethnicity` sont les mieux représentées sur les premiers axes (voir tableau Cos2).
+$\rightarrow$ Les modalités liées à l'assurance (`insurance`) et à l'éducation (`education`) sont bien représentées sur l'axe 1 ($Cos^2 > 0.3$).
+$\rightarrow$ Les modalités liées à l'ethnicité (`ethnicity`) et au statut professionnel (`selfemp`) sont bien représentées sur l'axe 2.
+$\rightarrow$ La variable `limit` est très mal représentée sur ce plan factoriel.
+$\rightarrow$ Vu la taille de l'échantillon ($N=8802$), la qualité de représentation des individus est globalement faible, le nuage étant très dispersé.
 
-• **Contributions** :
-Les contributions sont comparées à la moyenne $1/26 \approx 3.8\%$. (Les symboles (+) ou (-) indiquent la position sur l'axe).
+• **Contributions des modalités** :
+Les contributions sont comparées à la moyenne $1/K = 1/26 \approx 3.8\%$ (les symboles : (+) ou (-), indiquent la position sur l'axe).
 
-*   **Axe 1** : Les modalités qui ont fortement contribué à la construction de l'axe 1 sont :
-    *   `insurance_no` (+), `education_none` (+), `health_no` (+), `married_no` (+)
-    *   `insurance_yes` (-)
+$\rightarrow$ Les modalités qui ont fortement contribué à la construction de l'**Axe 1** sont :
+   *   `insurance_no` (+), `education_none` (+), `health_no` (+), `married_no` (+)
+   *   `insurance_yes` (-)
 
-*   **Axe 2** : Les modalités qui ont fortement contribué à la construction de l'axe 2 sont :
-    *   `selfemp_yes` (+), `region_west` (+), `ethnicity_other` (+), `education_phd` (+)
-    *   `ethnicity_afam` (-), `married_no` (-), `gender_female` (-), `region_south` (-)
+$\rightarrow$ Les modalités qui ont fortement contribué à la construction de l'**Axe 2** sont :
+   *   `selfemp_yes` (+), `region_west` (+), `ethnicity_other` (+), `gender_male` (+), `education_phd` (+)
+   *   `ethnicity_afam` (-), `married_no` (-), `gender_female` (-), `region_south` (-)
 
-• **Synthèse** :
-L'axe 1 oppose les individus assurés (négatif) aux individus non assurés, sans éducation et en mauvaise santé (positif). L'axe 2 distingue un profil spécifique d'indépendants de l'ouest (positif) par rapport à un profil plus démographique (femmes, afro-américains, sud) (négatif).
+• **Contribution des individus** :
+La contribution moyenne est $1/8802 \approx 0.01\%$. Étant donné le grand nombre d'individus, nous ne listons pas les contributions individuelles mais nous observons que la dispersion suit celle des modalités structurantes.
 
-## 8. Conclusion
+• **Synthèse à partir de la figure et des contributions** :
+On confirme que l'axe 1 est l'axe de la **précarité socio-économique** : il oppose les individus non assurés et sans éducation (droite) aux assurés (gauche).
+L'axe 2 révèle des **disparités démographiques et géographiques** : il oppose un profil d'indépendants de l'Ouest/Autres ethnies (haut) à un profil de femmes afro-américaines du Sud ou célibataires (bas).
 
-L'analyse met en évidence une structure principale (Axe 1) liée à la précarité socio-économique (absence d'assurance, faible éducation) et une structure secondaire (Axe 2) liée à des profils démographiques spécifiques (ethnicité, indépendants). Nous conseillerions aux décideurs de cibler les populations sans diplôme pour améliorer la couverture santé.
+Nous conseillerions aux décideurs de cibler prioritairement les populations **sans diplôme** (`education_none`) qui sont fortement corrélées à l'absence d'assurance (`insurance_no`) et à une mauvaise santé (`health_no`).
 
 ---
 ## Annexe : Code Python utilisé
