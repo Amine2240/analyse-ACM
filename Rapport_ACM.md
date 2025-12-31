@@ -1,5 +1,7 @@
 # Rapport d'Analyse des Données : Étude "Health Insurance" par ACM
 
+**2CS SIQ SIL Année 2025/2026 ANAD TD 4 ACM**
+
 **Binôme :** [Noms à compléter]  
 **Date :** 28 Décembre 2025
 
@@ -11,115 +13,74 @@ L'objectif de cette étude est d'explorer les relations entre les caractéristiq
 
 Nous utilisons pour cela une **Analyse des Correspondances Multiples (ACM)**. Cette méthode factorielle est particulièrement adaptée car notre jeu de données est majoritairement composé de variables qualitatives (catégorielles). Elle nous permettra de résumer l'information, de visualiser les associations entre modalités et d'identifier des profils types d'individus.
 
-## 2. Description des Données
+## 2. Data Sample
 
-Le jeu de données `HealthInsurance.csv` respecte les contraintes de l'étude :
+Aperçu des premières lignes du jeu de données `HealthInsurance` :
 
-* **Individus** : 8 802 observations.
-* **Variables retenues pour l'ACM** : 9 variables qualitatives.
-  * `health` (état de santé : yes/no)
-  * `limit` (limitation de santé : yes/no)
-  * `gender` (genre : male/female)
-  * `insurance` (couverture assurance : yes/no)
-  * `married` (statut marital : yes/no)
-  *   `selfemp` (indépendant : yes/no)
-  *   `region` (4 modalités : northeast, midwest, south, west)
-  *   `ethnicity` (3 modalités : cauc, afam, other)
-  *   `education` (7 modalités : none, highschool, bachelor, master, phd, ged, other)
+| health | limit | gender | insurance | married | selfemp | region | ethnicity | education |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| yes | no | male | yes | yes | no | south | cauc | master |
+| yes | no | female | yes | yes | no | west | cauc | bachelor |
+| no | yes | male | no | no | no | northeast | afam | none |
+| yes | no | male | yes | yes | no | west | cauc | bachelor |
+| yes | no | male | yes | yes | no | south | cauc | bachelor |
 
-Les variables quantitatives (`age`, `family`) n'ont pas été incluses directement dans l'ACM mais pourraient servir de variables illustratives ultérieurement.
+## 3. Eigenvalues
 
-## 3. Analyse de l'Inertie (Valeurs Propres)
+| Dim | Variance | % of var. | Cumulative % of var. |
+|---|---|---|---|
+| Dim.1 | 0.164 | 8.688 | 8.688 |
+| Dim.2 | 0.147 | 7.802 | 16.490 |
+| Dim.3 | 0.134 | 7.090 | 23.580 |
+| Dim.4 | 0.127 | 6.730 | 30.311 |
+| Dim.5 | 0.120 | 6.376 | 36.687 |
 
-### 3.1. Valeurs Propres Brutes
+## 4. Multiple Correspondence Analysis Results for variables
 
-L'inertie totale représente la quantité d'information contenue dans le tableau de données.
+Tableau des contributions et qualités de représentation ($Cos^2$) des modalités sur les premiers axes.
 
-| Axe (Composante) | Valeur Propre ($\lambda$) | % de Variance | % Cumulé |
-| :--- | :--- | :--- | :--- |
-| **Axe 1** | 0.1612 | **8.53%** | 8.53% |
-| **Axe 2** | 0.1464 | **7.75%** | **16.29%** |
+| Variable_Category | Dim 1 Cos2 | Dim 2 Cos2 | Dim 1 Contrib (%) | Dim 2 Contrib (%) |
+|---|---|---|---|---|
+| **insurance_no** | 0.488 | 0.007 | 26.486 | 0.442 |
+| **education_none** | 0.366 | 0.035 | 21.642 | 2.303 |
+| **ethnicity_afam** | 0.031 | 0.309 | 1.815 | 20.450 |
+| **selfemp_yes** | 0.001 | 0.215 | 0.052 | 14.263 |
+| **region_west** | 0.052 | 0.195 | 2.729 | 11.307 |
+| **health_no** | 0.144 | 0.000 | 9.063 | 0.012 |
+| **married_no** | 0.139 | 0.167 | 5.813 | 7.772 |
+| **ethnicity_other** | 0.009 | 0.102 | 0.557 | 7.389 |
+| **gender_female** | 0.013 | 0.185 | 0.449 | 7.337 |
+| **insurance_yes** | 0.488 | 0.007 | 6.573 | 0.110 |
 
-### 3.2. Correction de l'Inertie (Benzécri)
+## 5. Categorical variables (eta2)
 
-En ACM, les pourcentages d'inertie bruts sont souvent pessimistes (faibles) en raison du grand nombre de modalités. Pour mieux évaluer la part d'information expliquée, nous appliquons la correction de Benzécri.
+| Variable | Dim.1 | Dim.2 | Dim.3 |
+|---|---|---|---|
+| **health** | 0.144 | 0.000 | 0.308 |
+| **limit** | 0.029 | 0.000 | 0.450 |
+| **gender** | 0.013 | 0.185 | 0.001 |
+| **insurance** | 0.488 | 0.007 | 0.054 |
+| **married** | 0.139 | 0.167 | 0.125 |
+| **selfemp** | 0.001 | 0.215 | 0.000 |
+| **region** | 0.141 | 0.212 | 0.101 |
+| **ethnicity** | 0.042 | 0.386 | 0.083 |
+| **education** | 0.479 | 0.153 | 0.083 |
 
-**Paramètres :**
-*   Nombre de variables $P = 9$
-*   Inertie moyenne (seuil) $\bar{\lambda} = 1/P = 1/9 \approx 0.1111$
+## 6. Les figures
 
-Seules les valeurs propres supérieures à ce seuil ($\lambda > 0.1111$) sont retenues pour l'interprétation.
+### (a) Scree Plot
+Graphique des valeurs propres (éboulis).
 
-**Formule de correction :**
-$$ \tilde{\lambda} = \left( \frac{P}{P-1} (\lambda - \frac{1}{P}) \right)^2 $$
+### (b) Variable categories (Biplot)
+Représentation des modalités dans le plan factoriel 1-2.
+![ACM Résultats](acm_resultats.png)
 
-**Calculs :**
+### (c) Contributions
+Les contributions montrent que l'axe 1 est dominé par l'assurance et l'éducation, tandis que l'axe 2 est lié à l'ethnicité et au statut professionnel.
 
-*   **Axe 1** ($\lambda_1 = 0.1612$) :
-    $$ \tilde{\lambda}_1 = \left( \frac{9}{8} (0.1612 - 0.1111) \right)^2 \approx 0.00317 $$
+## 7. Conclusion
 
-*   **Axe 2** ($\lambda_2 = 0.1464$) :
-    $$ \tilde{\lambda}_2 = \left( \frac{9}{8} (0.1464 - 0.1111) \right)^2 \approx 0.00157 $$
-
-*   **Inertie Totale Corrigée** (somme des $\tilde{\lambda}$) : $\approx 0.00474$
-
-**Pourcentages Corrigés :**
-
-| Axe | % Inertie Corrigée | Interprétation |
-| :--- | :--- | :--- |
-| **Axe 1** | **66.9%** | L'axe 1 explique en réalité les deux tiers de l'information structurelle majeure. |
-| **Axe 2** | **33.1%** | L'axe 2 explique le tiers restant. |
-
-**Conclusion sur l'inertie** : Après correction, on constate que les deux premiers axes résument la quasi-totalité de l'information pertinente (au sens de Benzécri). L'interprétation du plan 1-2 est donc très robuste.
-
-## 4. Interprétation des Axes Factoriels
-
-L'analyse des coordonnées des modalités (voir graphique `acm_resultats.png`) permet de donner un sens aux axes.
-
-### 4.1. Axe 1 : Le gradient "Statut Socio-Économique & Santé"
-
-Cet axe horizontal est le plus structurant (66.9% de l'inertie corrigée). Il oppose clairement deux situations :
-
-*   **Côté Négatif (Gauche)** : On trouve les modalités associées à un niveau d'éducation élevé et une situation stable.
-    *   `education__master` (-0.99), `education__bachelor` (-0.51)
-    *   `insurance__yes` (-0.35) (Assuré)
-    *   `married__yes` (-0.26)
-
-*   **Côté Positif (Droite)** : On trouve les indicateurs de précarité sociale et sanitaire.
-    *   `education__none` (+1.55) (Aucun diplôme), `education__ged` (+0.64)
-    *   `insurance__no` (+1.39) (Non assuré)
-    *   `health__no` (+0.96) (Mauvaise santé)
-    *   `ethnicity__afam` (+0.54) (Afro-américain)
-
-**Synthèse Axe 1** : Il discrimine les individus selon leur **capital social et sanitaire**. Il oppose les populations favorisées et assurées aux populations plus vulnérables.
-
-### 4.2. Axe 2 : Distinction "Statut Professionnel & Démographie"
-
-Cet axe vertical apporte une nuance supplémentaire (33.1% de l'inertie corrigée) :
-
-*   **Côté Positif (Haut)** : Il isole un profil très spécifique.
-    *   `education__phd` (+1.97) (Doctorat)
-    *   `selfemp__yes` (+1.26) (Travailleurs indépendants)
-    *   `ethnicity__other` (+1.16)
-
-*   **Côté Négatif (Bas)** : Il regroupe des caractéristiques démographiques plus générales.
-    *   `ethnicity__afam` (-1.61)
-    *   `married__no` (-0.60) (Célibataire)
-    *   `gender__female` (-0.41) (Femme)
-
-**Synthèse Axe 2** : Cet axe semble isoler les **travailleurs indépendants hautement qualifiés** (souvent des profils atypiques dans les données de santé) par rapport au reste de la population, notamment les femmes célibataires issues de minorités.
-
-## 5. Conclusion
-
-L'Analyse des Correspondances Multiples a permis de structurer l'information contenue dans la base `HealthInsurance`. 
-
-1.  **Hiérarchie des facteurs** : Le facteur principal (Axe 1) est socio-économique. Il montre que l'absence de diplôme est le vecteur principal de la précarité (absence d'assurance et mauvaise santé).
-2.  **Profils types** :
-    *   **Type A (Gauche)** : Individus mariés, éduqués (Master/Bachelor), assurés.
-    *   **Type B (Droite)** : Individus sans diplôme, non assurés, en mauvaise santé.
-    *   **Type C (Haut)** : Indépendants avec un très haut niveau d'étude (PhD).
-
-Cette analyse suggère que les politiques de santé publique devraient cibler prioritairement les populations à faible niveau d'éducation, qui cumulent les risques de non-assurance et de mauvaise santé.
+L'analyse met en évidence une structure principale (Axe 1) liée à la précarité socio-économique (absence d'assurance, faible éducation) et une structure secondaire (Axe 2) liée à des profils démographiques spécifiques (ethnicité, indépendants).
 
 ---
 ## Annexe : Code Python utilisé
