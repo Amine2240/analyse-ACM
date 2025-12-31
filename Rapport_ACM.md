@@ -1,9 +1,9 @@
 # Rapport d'Analyse des Données : Étude "Health Insurance" par ACM
 
-**2CS SIQ SIL Année 2025/2026 ANAD TD 4 ACM**
+**2CS SIL Année 2025/2026 ANAD TD 4 ACM**
 
-**Binôme :** [Noms à compléter]  
-**Date :** 28 Décembre 2025
+**Binôme :** Khiali Imad & Kadou Amine 
+**Date :** 31 Décembre 2025
 
 ---
 
@@ -34,6 +34,8 @@ Aperçu des premières lignes du jeu de données `HealthInsurance` :
 | Dim.3 | 0.134 | 7.090 | 23.580 |
 | Dim.4 | 0.127 | 6.730 | 30.311 |
 | Dim.5 | 0.120 | 6.376 | 36.687 |
+
+En ACM, nous ne considérons que les valeurs propres supérieures à la moyenne égale à $1/p = 1/9 \approx 0.11$. Les 5 premiers axes seront pris en compte pour l'interprétation. Le taux d'inertie cumulé des 2 premiers axes est de 16.49%.
 
 ## 4. Multiple Correspondence Analysis Results for variables
 
@@ -78,9 +80,28 @@ Représentation des modalités dans le plan factoriel 1-2.
 ### (c) Contributions
 Les contributions montrent que l'axe 1 est dominé par l'assurance et l'éducation, tandis que l'axe 2 est lié à l'ethnicité et au statut professionnel.
 
-## 7. Conclusion
+## 7. Analyse des résultats
 
-L'analyse met en évidence une structure principale (Axe 1) liée à la précarité socio-économique (absence d'assurance, faible éducation) et une structure secondaire (Axe 2) liée à des profils démographiques spécifiques (ethnicité, indépendants).
+• **Qualité de représentation** :
+Les modalités `insurance`, `education` et `ethnicity` sont les mieux représentées sur les premiers axes (voir tableau Cos2).
+
+• **Contributions** :
+Les contributions sont comparées à la moyenne $1/26 \approx 3.8\%$. (Les symboles (+) ou (-) indiquent la position sur l'axe).
+
+*   **Axe 1** : Les modalités qui ont fortement contribué à la construction de l'axe 1 sont :
+    *   `insurance_no` (+), `education_none` (+), `health_no` (+), `married_no` (+)
+    *   `insurance_yes` (-)
+
+*   **Axe 2** : Les modalités qui ont fortement contribué à la construction de l'axe 2 sont :
+    *   `selfemp_yes` (+), `region_west` (+), `ethnicity_other` (+), `education_phd` (+)
+    *   `ethnicity_afam` (-), `married_no` (-), `gender_female` (-), `region_south` (-)
+
+• **Synthèse** :
+L'axe 1 oppose les individus assurés (négatif) aux individus non assurés, sans éducation et en mauvaise santé (positif). L'axe 2 distingue un profil spécifique d'indépendants de l'ouest (positif) par rapport à un profil plus démographique (femmes, afro-américains, sud) (négatif).
+
+## 8. Conclusion
+
+L'analyse met en évidence une structure principale (Axe 1) liée à la précarité socio-économique (absence d'assurance, faible éducation) et une structure secondaire (Axe 2) liée à des profils démographiques spécifiques (ethnicité, indépendants). Nous conseillerions aux décideurs de cibler les populations sans diplôme pour améliorer la couverture santé.
 
 ---
 ## Annexe : Code Python utilisé
