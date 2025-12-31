@@ -124,6 +124,11 @@ Cette analyse suggère que les politiques de santé publique devraient cibler pr
 ---
 ## Annexe : Code Python utilisé
 
+Le code source complet et les fichiers du projet sont disponibles sur le dépôt GitHub suivant :  
+**[https://github.com/Amine2240/analyse-ACM](https://github.com/Amine2240/analyse-ACM)**
+
+### Aperçu du script principal (`preparation.py`)
+
 ```python
 import pandas as pd
 import prince
