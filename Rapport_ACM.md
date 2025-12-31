@@ -72,6 +72,7 @@ Tableau des contributions et qualités de représentation ($Cos^2$) des modalit�
 
 ### (a) Scree Plot
 Graphique des valeurs propres (éboulis).
+![Scree Plot](scree_plot.png)
 
 ### (b) Variable categories (Biplot)
 Représentation des modalités dans le plan factoriel 1-2.
